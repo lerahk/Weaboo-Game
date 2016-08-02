@@ -2,7 +2,8 @@
 
 private var randDirection : int = 1;
 var isSick : bool = false; //make this private for release
-var timer : double;
+var affectionConditions : bool = false;
+var timer : double = 7.0;
 var clip : AnimationClip;
 
 function genericMovement()
@@ -31,7 +32,6 @@ function onCollisionEnter()
    {
      randDirection = Random.Range(1,5);
    }
-
   }
   
 function checkStats()
@@ -48,35 +48,53 @@ function checkStats()
         randDirection = 1;
         animation.Play(StopSameLayer);
       }
-    }//nested if
+    }
     if(isSick == true)
     {
       yield StartCoroutine(sick(timer));
     }
-    if()
+    ////////////////////////////////////////////////////////////////////
+    if(cNourishment <= minNourishment)
     {
-      
+      yield StartCoroutine(lowerHealth(timer));
     }
-    if()
+    if(cHappiness <= 25)
     {
-      
+      yield StartCoroutine(lowerAffection(timer))
     }
-    if()
+    if(cEnergy <= 0)
     {
-      
+       //**Character finds the nearest bed and then goes to sleep (try hiding visibility and playing the sleep animation)**//
     }
-    if()
+    if((cHealth > 80) && (cHappiness > 75) && (cNourishment > 60))
     {
-      
+      affectionConditions = true;
     }
-  }
 }
 
 function sick(seconds:int)
 {
-  yield WaitForSeconds(timer);
-  energy--;
-  nourishment--;
-  happiness--;
-  affection--;
+  yield WaitForSeconds();
+  cEnergy--;
+  cNourishment--;
+  cHappiness--;
+  cAffection--;
+}
+
+function lowerHealth(seconds:int)
+{
+  yield WaitForSeconds();
+  cHealth--;
+}
+
+function lowerHappiness(seconds:int)
+{
+  yield WaitForSeconds();
+  cHappiness--;
+}
+
+function lowerAffection(seconds:int)
+{
+  yield WaitForSeconds();
+  cAffection--;
 }
