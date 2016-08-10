@@ -1,11 +1,12 @@
 #pragma strict
 
 private var randDirection : int = 1;
+var monster = new Monster();
 var isSick : bool = false; //make this private for release
 var affectionConditions : bool = false;
 var timer : double = 7.0;
 var clip : AnimationClip;
-
+ 
 function genericMovement()
 {
    switch(randDirection)
@@ -28,10 +29,6 @@ function onCollisionEnter()
    {
     randDirection = Random.Range(1,5);
    }
-   else if (other.collider.gameObject.name == "furnitureBlock")
-   {
-     randDirection = Random.Range(1,5);
-   }
   }
   
 function checkStats()
@@ -49,26 +46,30 @@ function checkStats()
         animation.Play(StopSameLayer);
       }
     }
+    
+    if((cHealth > 80) && (cHappiness > 75) && (cNourishment > 60))
+    {
+      affectionConditions = true;
+    }
+    
     if(isSick == true)
     {
       yield StartCoroutine(sick(timer));
     }
-    ////////////////////////////////////////////////////////////////////
+    
     if(cNourishment <= minNourishment)
     {
       yield StartCoroutine(lowerHealth(timer));
     }
+    
     if(cHappiness <= 25)
     {
       yield StartCoroutine(lowerAffection(timer))
     }
-    if(cEnergy <= 0)
+    
+    if(cEnergy <= minEnergy)
     {
        //**Character finds the nearest bed and then goes to sleep (try hiding visibility and playing the sleep animation)**//
-    }
-    if((cHealth > 80) && (cHappiness > 75) && (cNourishment > 60))
-    {
-      affectionConditions = true;
     }
 }
 
