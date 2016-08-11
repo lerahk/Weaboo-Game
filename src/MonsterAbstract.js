@@ -28,10 +28,6 @@ function onCollisionEnter()
    {
     randDirection = Random.Range(1,5);
    }
-   else if (other.collider.gameObject.name == "furnitureBlock")
-   {
-     randDirection = Random.Range(1,5);
-   }
   }
   
 function checkStats()
