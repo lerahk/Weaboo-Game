@@ -1,4 +1,4 @@
-#pragma strict
+#pragma strict;
 
 
 ///Initialized the MINIMUM STATS : These Stay constant and final//
@@ -12,6 +12,7 @@ var isSick : bool = false;
 var tempTimer : double = 7.0; //make the a constant when we find the right number
 var criticalTimer : double = 4.0;
 var timer : double = 15.0; //same with this one
+var randDirection : int = 5;
 
 //All the functions to check your statistics//
 

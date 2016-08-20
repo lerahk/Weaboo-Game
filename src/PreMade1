@@ -9,18 +9,18 @@ private var cEnergy : int;
 private var cHappiness : int;
 private var cAffection : int;
 
-function Start()
+function Awake()
 {
-  cHealth = 100;
-  cNourishment = 100;
-  cEnergy = 100;
-  cHappiness = 100;
-  cAffection = 50;
+	cHealth = 70;
+	cNourishment = 100;
+	cEnergy = 50;
+	cHappiness = 30;
+	cAffection = 0;
 }
 
 function Update()
 {
-  monster.checkHealth(cHealth);
+	monster.checkHealth(cHealth);
   monster.checkEnergy(cEnergy);
   monster.checkHappiness(cHappiness);
   monster.checkAffection(cAffection);
@@ -29,9 +29,9 @@ function Update()
   monster.OnCollisionEnter();
 }
 
-function FixedUpdate()
+function FixedUpdate
 {
-  monster.lowerHappiness(timer, cHappiness);
+	monster.lowerHappiness(timer, cHappiness);
   monster.lowerAffection(timer);
   monster.lowerEnergy(timer);
   monster.lowerNourishment(timer);
